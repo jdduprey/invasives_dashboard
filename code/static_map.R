@@ -32,6 +32,7 @@ p <- ggplot() +
         axis.text = element_text(size = 8, colour = 1, face = "bold"),
         panel.grid = element_line(colour = NA)) 
 
+ggsave(filename="./figures/site_map.png")
 p 
 
 p + geom_point(data = site_meta, aes(x = long, y = lat), size = 5, col="red")
