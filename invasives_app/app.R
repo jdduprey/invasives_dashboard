@@ -72,7 +72,8 @@ server <- function(input, output) {
     # selected_month <- input$month
     # selected_year <- input$year
     
-    #TODO this needs to be eliminated to the color scale works right!
+    #TODO this needs to be eliminated to the color scale works
+    #TODO use subset with ggplot to get the correct behavior 
     # and get a single month and year
     one_month_df <- time_filter(full_map_df, selected_month, selected_year)
     
