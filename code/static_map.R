@@ -29,28 +29,32 @@ time_filter <- function(df, selected_month, selected_year){
     filter(year %in% c(selected_year))
 }
 
+
+selected_month <- 03
+selected_year <- 2018
+
 # and get a single month and year
-mar_2018_df <- time_filter(full_map_df, 03, 2018)
+one_month_df <- time_filter(full_map_df, selected_month, selected_year)
 
 
 # store map with plot to variable
 p <- ggplot() + 
   geom_sf(data=NW_coast, col = 1, fill = "ivory") +
   coord_sf(xlim = -c(125, 122), ylim = c(47,49)) +
-  geom_point(data = mar_2018_df, aes(x = long, y = lat, color=prop_nn), size = 8, alpha = 0.8) +
+  geom_point(data = one_month_df, aes(x = long, y = lat, color=prop_nn), size = 8, alpha = 0.8) +
   scale_color_distiller(palette = "RdYlBu") +
-  geom_text(data= mar_2018_df, aes(x = long, y = lat, label=round(prop_nn,2)), size = 2) +
-  ggrepel::geom_text_repel(data = mar_2018_df, aes(x = long, y = lat, label = site)) +
+  geom_text(data= one_month_df, aes(x = long, y = lat, label=round(prop_nn,2)), size = 2) +
+  ggrepel::geom_text_repel(data = one_month_df, aes(x = long, y = lat, label = site)) +
   theme_bw() + 
   theme(panel.background = element_rect(fill = "white"),
         axis.text = element_text(size = 8, colour = 1, face = "bold"),
         panel.grid = element_line(colour = NA)) 
 
+p
 # save plot
 ggsave(filename="./figures/site_map.png")
 
-# display plot
-p 
+
 
 
   #scale_x_continuous(breaks = c(35,55))+
