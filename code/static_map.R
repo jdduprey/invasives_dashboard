@@ -12,21 +12,31 @@ library(ggplot2)
 library(ggsn)
 library(tidyverse)
 library(here)
-library(oce)
-library(ocedata)
 library(dplyr)
 
-data("coastlineWorldFine")
 
-NW_coast = read_sf("./data/ne_10m_coastline/ne_10m_coastline.shp")
-
+NW_coast <- read_sf("./data/ne_10m_coastline/ne_10m_coastline.shp")
 site_meta <- read.csv("./data/site_meta.csv")
+invasion_data <- read.csv("./data/monthly_invasion_data.csv")
+
+full_map_df <- left_join(invasion_data, site_meta)
+
+time_filter <- function(df, selected_month, selected_year){
+  out_df <- df %>%
+    filter(month %in% c(selected_month)) %>%
+    filter(year %in% c(selected_year))
+}
+
+mar_2018_df <- time_filter(full_map_df, 03, 2018)
+
 
 p <- ggplot() + 
   geom_sf(data=NW_coast, col = 1, fill = "ivory") +
   coord_sf(xlim = -c(125, 122), ylim = c(47,49)) +
-  geom_point(data = site_meta, aes(x = long, y = lat), size = 8, col="blue") +
-  ggrepel::geom_text_repel(data = site_meta, aes(x = long, y = lat, label = site_name))+
+  geom_point(data = mar_2018_df, aes(x = long, y = lat, color=prop_nn), size = 8) +
+  scale_color_distiller(palette = "RdYlBu") +
+  geom_text(data= mar_2018_df, aes(x = long, y = lat, label=round(prop_nn,2)), size = 2) +
+  ggrepel::geom_text_repel(data = mar_2018_df, aes(x = long, y = lat, label = site)) +
   theme_bw() + 
   theme(panel.background = element_rect(fill = "white"),
         axis.text = element_text(size = 8, colour = 1, face = "bold"),
