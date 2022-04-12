@@ -1,0 +1,13 @@
+name: invasives_dashboard
+title: invasives_dashboard
+username:
+account: joed
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6075933
+bundleId: 5791559
+url: https://joed.shinyapps.io/invasives_dashboard/
+when: 1649791759.61979
+lastSyncTime: 1649791759.61982
+asMultiple: FALSE
+asStatic: FALSE
