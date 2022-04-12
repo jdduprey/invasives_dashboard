@@ -5,9 +5,9 @@ account: joed
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6067559
-bundleId: 5791552
+bundleId: 5791630
 url: https://joed.shinyapps.io/invasives_app/
-when: 1649791605.03807
-lastSyncTime: 1649791605.03808
+when: 1649793097.9309
+lastSyncTime: 1649793097.93093
 asMultiple: FALSE
 asStatic: FALSE

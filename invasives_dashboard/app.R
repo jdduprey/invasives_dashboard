@@ -48,7 +48,10 @@ ui <- fluidPage(
              
             
              plotOutput("map")), 
+    
+    tabPanel("Invasives Heatmap")
              ))
+
 
 
 
@@ -66,14 +69,17 @@ server <- function(input, output) {
       geom_sf(data=NW_coast, col = 1, fill = "ivory") +
       coord_sf(xlim = -c(125, 122), ylim = c(47,49)) +
       geom_point(data = subset(one_month_df, year == selected_year & month == selected_month), 
-                 aes(x = long, y = lat, color=prop_nn), size = 8, alpha = 0.8) +
-      scale_color_distiller(palette = "RdYlBu", limits = c(0, 0.18)) +
+                 aes(x = long, y = lat, color = prop_nn), size = 8, alpha = 0.8) +
+      scale_color_distiller(palette = "RdYlBu", limits = c(0, 0.18),
+                            name = "Invasion Rate \n(non-native species richness / total species richness)") +
       geom_text(data = subset(one_month_df, year == selected_year & month == selected_month), 
-                aes(x = long, y = lat, label=round(prop_nn,2)), size = 3) +
-      #ggrepel::geom_text_repel(data = one_month_df, aes(x = long, y = lat, label = site)) +
+                aes(x = long, y = lat, label = round(prop_nn,2)), size = 3) +
+      xlab(NULL) + ylab(NULL) +
+      ggrepel::geom_text_repel(data = subset(one_month_df, year == selected_year & month == selected_month), 
+                               aes(x = long, y = lat, label = site)) +
       theme_bw() + 
       theme(panel.background = element_rect(fill = "white"),
-            axis.text = element_text(size = 8, colour = 1, face = "bold"),
+            axis.text = element_text(size = 8, colour = 1),
             panel.grid = element_line(colour = NA)) 
     
     p
