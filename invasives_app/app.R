@@ -48,11 +48,11 @@ ui <- fluidPage(
     tabPanel("Invasives Map",
              sliderTextInput(inputId = "time_step", 
                          label = "Select time period.", 
-                         choices = c("March 2017", "May 2017", "June 2017",
+                         choices = c("Mar 2017", "May 2017", "June 2017",
                                      "July 2017", "August 2017", "September 2017",
                                      "October 2017", "November 2017", "January 2018",
                                      "March 2018", "May 2018", "July 2018"),
-                         selected = c("March 2017")),
+                         selected = c("Mar 2017")),
              
             
              plotOutput("map")), 
